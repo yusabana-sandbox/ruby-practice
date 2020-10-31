@@ -1,5 +1,9 @@
 # ruby-practice
 
+## RubyのConfigurationパターン
+
+- [Ruby Gem Configuration Pattern - Hack Your Design!](https://blog.toshimaru.net/ruby-configuration-pattern/)
+
 ## IO Class
 
 - [Ruby IOクラスについて学ぶ - Qiita](https://qiita.com/naotospace/items/bd0a5295e540e27936b3)

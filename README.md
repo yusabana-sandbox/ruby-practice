@@ -3,6 +3,12 @@
 ## RubyのConfigurationパターン
 
 - [Ruby Gem Configuration Pattern - Hack Your Design!](https://blog.toshimaru.net/ruby-configuration-pattern/)
+- https://github.com/winebarrel/ridgepole/blob/0.8/lib/ridgepole/dsl_parser/context.rb#L94-L104
+
+```
+# fileを読み込んでそのコンテキストで実行する
+instance_eval(File.read(file), file)
+```
 
 ## IO Class
 

@@ -1,20 +1,41 @@
 version: 2
 jobs:
-  build1:
+  one:
     docker:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
-      - run: echo "1 hello world!!"
-  build2:
+      - run: echo "A first hello"
+      - run: mkdir -p my_workspace
+      - run: echo "Trying out workspaces" > my_workspace/echo-output
+      - persist_to_workspace:
+          # 配列の中にオブジェクトを書く場合は1つ深くネストする
+          # 絶対パスまたは working_directory からの相対パスでなければなりません
+          root: my_workspace
+          # ルートからの相対パスでなければなりません
+          paths:
+            - echo-output
+  two:
     docker:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
-      - run: echo "2 hello world!!"
+      - run: echo "A more familiar hi"
+      - attach_workspace:
+          # 絶対パスであるか、working_directory からの相対パスでなければなりません
+          at: my_workspace
+
+      - run: |
+          if [[ $(cat my_workspace/echo-output) == "Trying out workspaces" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
 workflows:
   version: 2
-  go_go_go:
+  one_and_two:
     jobs:
-      - build1
-      - build2
+      - one
+      - two:
+          requires:
+            - one

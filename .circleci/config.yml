@@ -12,3 +12,9 @@ jobs:
     steps:
       - checkout
       - run: echo "2 hello world!!"
+workflows:
+  version: 2
+  go_go_go:
+    jobs:
+      - build1
+      - build2
